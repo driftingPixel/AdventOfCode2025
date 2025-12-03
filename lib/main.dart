@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:untitled/components/TasklistItem/TasklistItem.dart';
 import 'models/DataForList.dart';
@@ -60,7 +58,7 @@ class MyHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Select task to see solution'),
-            ...data.mapIndexed((index, el) => new TasklistItem(index + 1, el))
+            ...data.mapIndexed((index, el) => new TasklistItem(id: index + 1, data: el))
           ]
         ),
       ),
