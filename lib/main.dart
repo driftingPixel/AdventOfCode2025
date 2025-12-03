@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/components/TasklistItem/TasklistItem.dart';
-import 'models/DataForList.dart';
+import 'package:untitled/tasks/ITask.dart';
+import 'package:untitled/tasks/Task1.dart';
+import 'package:untitled/tasks/Task2.dart';
+import 'package:untitled/tasks/Task3.dart';
 import 'package:collection/collection.dart';
 
 void main() {
@@ -25,19 +28,8 @@ class MyApp extends StatelessWidget {
 
 
 class MyHomePage extends StatelessWidget {
-  final  List<DataForList> data = [
-    new DataForList(
-      '              ____           *\n            ________/O___\\__________|________________________  ',
-      false,
-    ),
-    new DataForList(
-      '        _______||_________\n               | _@__ || _o_    |_ _________________________   ',
-      false,
-    ),
-    new DataForList(
-      '        |_&_%__||_oo__^=_[ \\|     _    .. .. ..     |\n                                 \\_]__--|_|___[]_[]_[]__//_|   ',
-      false,
-    )
+  final  List<Task> data = [
+    new Task1(), new Task2(), new Task3()
   ];
 
   MyHomePage({super.key, required this.title});
@@ -58,7 +50,7 @@ class MyHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Select task to see solution'),
-            ...data.mapIndexed((index, el) => new TasklistItem(id: index + 1, data: el))
+            ...data.mapIndexed((index, el) => new TasklistItem(id: index + 1, task: el))
           ]
         ),
       ),
