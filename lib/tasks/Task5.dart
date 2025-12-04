@@ -5,7 +5,7 @@ class Task5 extends Task{
   getTaskData() {
     return new TaskData(
         5,
-        '',
+        '                                    |_[#]_@@__//_@@@|   ',
         false,
         """""",
         """""");

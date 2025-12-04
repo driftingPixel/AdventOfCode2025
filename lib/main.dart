@@ -5,6 +5,8 @@ import 'package:untitled/tasks/Task1.dart';
 import 'package:untitled/tasks/Task2.dart';
 import 'package:untitled/tasks/Task3.dart';
 import 'package:collection/collection.dart';
+import 'package:untitled/tasks/Task4.dart';
+import 'package:untitled/tasks/Task5.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final  List<Task> data = [
-    new Task1(), new Task2(), new Task3()
+    new Task1(), new Task2(), new Task3(), new Task4(), new Task5()
   ];
 
   MyHomePage({super.key, required this.title});
