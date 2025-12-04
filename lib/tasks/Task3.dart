@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:untitled/models/TaskData.dart';
 import 'package:untitled/tasks/ITask.dart';
 
@@ -6,7 +8,7 @@ class Task3 extends Task{
     return new TaskData(
         3,
         '        |_&_%__||_oo__^=_[ \\|     _    .. .. ..     |\n                                 \\_]__--|_|___[]_[]_[]__//_|   ',
-        false,
+        true,
         """Lobby
 You descend a short staircase, enter the surprisingly vast lobby, and are quickly cleared by the security checkpoint. When you get to the main elevators, however, you discover that each one has a red light above it: they're all offline.
 
@@ -235,6 +237,31 @@ There are many batteries in front of you. Find the maximum joltage possible from
 6176285753884783858721476418667873518844575217257773535117642812171646162823338383814863224888357559""");
   }
   @override getSolution() {
-    return 'Not done yet :(';
+    print("Start");
+    final input = this.getTaskData().input;
+    final banks = input.split("\n").map((line) => line.split("").map((el) => int.parse(el)));
+
+    final joltages = banks.map((bank) => this.getJoltage(bank.toList()));
+    final result = joltages.reduce((a, b) => a + b);
+    print(result);
+    return '$result';
+  }
+
+  int getJoltage(List<int> bank) {
+    final tempBank = new List.from(bank);
+    tempBank.sort((a, b) => b - a);
+
+    final biggest = tempBank[0];
+    final secondBiggest = tempBank[1];
+
+    final indexOfBiggest = bank.indexOf(biggest);
+    //When biggest is of the end of line
+    if(indexOfBiggest == bank.length - 1) {
+      return secondBiggest * 10 + biggest;
+    } else {
+      final subListAfterBiggest = bank.sublist(indexOfBiggest + 1);
+      subListAfterBiggest.sort((a, b) => b - a);
+      return biggest * 10 + subListAfterBiggest[0];
+    }
   }
 }
