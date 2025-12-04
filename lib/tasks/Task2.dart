@@ -6,7 +6,7 @@ class Task2 extends Task{
     return new TaskData(
         2,
         '        _______||_________\n               | _@__ || _o_    |_ _________________________   ',
-        false,
+        true,
         """Gift Shop
 You get inside and take the elevator to its only other stop: the gift shop. "Thank you for visiting the North Pole!" gleefully exclaims a nearby sign. You aren't sure who is even allowed to visit the North Pole, but you know you can access the lobby through here, and from there you can access the rest of the North Pole base.
 
@@ -44,6 +44,32 @@ What do you get if you add up all of the invalid IDs?""",
         """503950-597501,73731-100184,79705998-79873916,2927-3723,35155-50130,52-82,1139-1671,4338572-4506716,1991-2782,1314489-1387708,8810810-8984381,762581-829383,214957-358445,9947038-10058264,4848455367-4848568745,615004-637022,5827946-5911222,840544-1026063,19-46,372804-419902,486-681,815-1117,3928-5400,28219352-28336512,6200009-6404247,174-261,151131150-151188124,19323-26217,429923-458519,5151467682-5151580012,9354640427-9354772901,262-475,100251-151187,5407-9794,8484808500-8484902312,86-129,2-18""");
   }
   @override getSolution() {
-    return 'Not done yet :(';
+    final input = this.getTaskData().input;
+    final ranges = input.split(",");
+
+    var result = ranges
+        .map((range) => getInvalidIdsNumbersSum(int.parse(range.split("-")[0]), int.parse(range.split("-")[1])))
+        .reduce((a, b) => a + b);
+    return '$result';
+  }
+
+  getInvalidIdsNumbersSum(int startId, int endId){
+    var sum = 0;
+    for(var i = startId; i<= endId; i++) {
+      if(isInvalidId(i)){
+        sum += i;
+      }
+    }
+    return sum;
+  }
+
+  bool isInvalidId(int value) {
+    String str = value.toString();
+    final strLength = str.length;
+    if(strLength % 2 == 0){
+      return str.substring(0,strLength ~/ 2) == str.substring(strLength ~/ 2);
+    } else {
+      return false;
+    }
   }
 }
